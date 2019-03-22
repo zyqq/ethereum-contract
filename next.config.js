@@ -12,7 +12,7 @@ module.exports = {
    
     // 修改config对象
    
-    node: {
+    config.node = {
       fs: "empty"
     }
     return config

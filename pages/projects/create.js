@@ -71,7 +71,8 @@ class ProjectCreate extends React.Component {
       console.log(result);
 
       setTimeout(() => {
-        location.href = '/projects';
+        // location.href = '/projects';
+        location.href = '/';
       }, 1000);
     } catch (err) {
       console.error(err);

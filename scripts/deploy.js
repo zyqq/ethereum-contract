@@ -32,7 +32,8 @@ const web3 = new Web3(provider);
     const contractAddress = result.options.address;
 
     console.log('合约部署成功:', contractAddress);
-    console.log('合约查看地址:', `https://rinkeby.etherscan.io/address/${contractAddress}`);
+    // console.log('合约查看地址:', `https://rinkeby.etherscan.io/address/${contractAddress}`);
+    console.log('合约查看地址:', `https://ropsten.etherscan.io/address/${contractAddress}`);
 
     // 6. 合约地址写入文件系统
     const addressFile = path.resolve(__dirname, '../address.json');

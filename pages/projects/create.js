@@ -4,7 +4,7 @@ import { Gpio } from 'rpio2';
 import { Link } from '../../routes';
 import web3 from '../../libs/web3';
 import ProjectList from '../../libs/projectList';
-import Led from '../../libs/led';
+// import Led from '../../libs/led';
 import withRoot from '../../libs/withRoot';
 import Layout from '../../components/Layout';
 
@@ -96,34 +96,34 @@ class ProjectCreate extends React.Component {
     }
   }
 
-  async toggleLedStatus() {
+  toggleLedStatus() {
+    this.LedOn()
+    // try {
+    //   this.setState({ loading: true, errmsg: '' });
 
-    try {
-      this.setState({ loading: true, errmsg: '' });
+    //   // 获取账户
+    //   const accounts = await web3.eth.getAccounts();
+    //   const owner = accounts[0];
 
-      // 获取账户
-      const accounts = await web3.eth.getAccounts();
-      const owner = accounts[0];
+    //   // 点灯光
+    //   const result = await Led.methods
+    //     .toggleLedStatus('1')
+    //     .send({ from: owner, gas: '5000000' });
 
-      // 点灯光
-      const result = await Led.methods
-        .toggleLedStatus('1')
-        .send({ from: owner, gas: '5000000' });
+    //   this.setState({ errmsg: '点灯成功' });
+    //   console.log(result);
 
-      this.setState({ errmsg: '点灯成功' });
-      console.log(result);
-
-      setTimeout(() => {
-        // location.href = '/projects';
-        this.LedOn()
-        location.href = '/';
-      }, 1000);
-    } catch (err) {
-      console.error(err);
-      this.setState({ errmsg: err.message || err.toString });
-    } finally {
-      this.setState({ loading: false });
-    }
+    //   setTimeout(() => {
+    //     // location.href = '/projects';
+    //     this.LedOn()
+    //     location.href = '/';
+    //   }, 1000);
+    // } catch (err) {
+    //   console.error(err);
+    //   this.setState({ errmsg: err.message || err.toString });
+    // } finally {
+    //   this.setState({ loading: false });
+    // }
   }
 
   render() {

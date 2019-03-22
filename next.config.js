@@ -8,8 +8,13 @@ module.exports = {
   publicRuntimeConfig: {
     infuraUrl: config.get('infuraUrl'),
   },
-
-  node: {
-    fs: "empty"
+  webpack: (config, { dev }) => {
+   
+    // 修改config对象
+   
+    node: {
+      fs: "empty"
+    }
+    return config
   }
 };

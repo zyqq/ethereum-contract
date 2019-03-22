@@ -56,7 +56,8 @@ class Index extends React.Component {
     return (
       <Layout>
         <Grid container spacing={16}>
-          {projects.length === 0 && <p>还没有项目，快去创建吧</p>}
+          {/* {projects.length === 0 && <p>还没有项目，快去创建吧</p>} */}
+          {projects.length === 0 && <p>还没有区块，快去创建吧</p>}
           {projects.length > 0 && projects.map(this.renderProject)}
         </Grid>
       </Layout>
@@ -67,35 +68,42 @@ class Index extends React.Component {
     const progress = project.balance / project.goal * 100;
 
     return (
-      <Grid item md={6} key={project.address}>
-        <Card>
-          <CardContent>
-            <Typography gutterBottom variant="headline" component="h2">
-              {project.description}
-            </Typography>
-            <LinearProgress style={{ margin: '10px 0' }} color="primary" variant="determinate" value={progress} />
-            <Grid container spacing={16}>
-              <InfoBlock title={`${web3.utils.fromWei(project.goal, 'ether')} ETH`} description="募资上限" />
-              <InfoBlock title={`${web3.utils.fromWei(project.minInvest, 'ether')} ETH`} description="最小投资金额" />
-              <InfoBlock title={`${web3.utils.fromWei(project.maxInvest, 'ether')} ETH`} description="最大投资金额" />
-              <InfoBlock title={`${project.investorCount}人`} description="参投人数" />
-              <InfoBlock title={`${web3.utils.fromWei(project.balance, 'ether')} ETH`} description="已募资金额" />
-            </Grid>
-          </CardContent>
-          <CardActions>
-            <Link route={`/projects/${project.address}`}>
-              <Button size="small" color="primary">
-                立即投资
-              </Button>
-            </Link>
-            <Link route={`/projects/${project.address}`}>
-              <Button size="small" color="secondary">
-                查看详情
-              </Button>
-            </Link>
-          </CardActions>
-        </Card>
-      </Grid>
+      // <Grid item md={6} key={project.address}>
+      //   <Card>
+      //     <CardContent>
+      //       <Typography gutterBottom variant="headline" component="h2">
+      //         {project.description}
+      //       </Typography>
+      //       <LinearProgress style={{ margin: '10px 0' }} color="primary" variant="determinate" value={progress} />
+      //       <Grid container spacing={16}>
+      //         <InfoBlock title={`${web3.utils.fromWei(project.goal, 'ether')} ETH`} description="募资上限" />
+      //         <InfoBlock title={`${web3.utils.fromWei(project.minInvest, 'ether')} ETH`} description="最小投资金额" />
+      //         <InfoBlock title={`${web3.utils.fromWei(project.maxInvest, 'ether')} ETH`} description="最大投资金额" />
+      //         <InfoBlock title={`${project.investorCount}人`} description="参投人数" />
+      //         <InfoBlock title={`${web3.utils.fromWei(project.balance, 'ether')} ETH`} description="已募资金额" />
+      //       </Grid>
+      //     </CardContent>
+      //     <CardActions>
+      //       <Link route={`/projects/${project.address}`}>
+      //         <Button size="small" color="primary">
+      //           立即投资
+      //         </Button>
+      //       </Link>
+      //       <Link route={`/projects/${project.address}`}>
+      //         <Button size="small" color="secondary">
+      //           查看详情
+      //         </Button>
+      //       </Link>
+      //     </CardActions>
+      //   </Card>
+      // </Grid>
+
+      <Layout>
+        <Typography variant="title" color="inherit">
+          {/* 创建项目 */}
+          全部区块
+        </Typography>
+      </Layout>
     );
   }
 }

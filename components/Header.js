@@ -40,23 +40,26 @@ class Header extends React.Component {
         <div className={classes.wrapper}>
           <Toolbar className={classes.toolbar}>
             <Typography variant="title" color="inherit" className={classes.brand}>
-              众筹 DApp
+              {/* 众筹 DApp */}
+              以太坊与树莓派
             </Typography>
             <p className={classes.flexContainer}>
               <a href="/" className={classes.anchor}>
                 <Typography variant="title" color="inherit">
-                  项目列表
+                  {/* 项目列表 */}
+                  全部区块
                 </Typography>
               </a>
-              <a href="https://juejin.im/book/5addb2eb6fb9a07abd0d4557" target="_blank" className={classes.anchor}>
+              {/* <a href="https://juejin.im/book/5addb2eb6fb9a07abd0d4557" target="_blank" className={classes.anchor}>
                 <Typography variant="title" color="inherit">
                   掘金小册
                 </Typography>
-              </a>
+              </a> */}
             </p>
             <Link route="/projects/create">
               <Button variant="raised" color="primary">
-                发起项目
+                {/* 发起项目 */}
+                操控树莓派
               </Button>
             </Link>
           </Toolbar>

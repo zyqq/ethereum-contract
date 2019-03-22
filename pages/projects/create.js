@@ -22,6 +22,7 @@ class ProjectCreate extends React.Component {
     };
 
     this.onSubmit = this.createProject.bind(this);
+    this.LedOn = this.LedOn.bind(this)
   }
 
 
@@ -176,7 +177,7 @@ class ProjectCreate extends React.Component {
             {this.state.loading ? <CircularProgress color="secondary" size={24} /> : '创建项目'}
           </Button>
           
-          <Button variant="raised" size="large" color="primary" onClick={this.onSubmit}>
+          <Button variant="raised" size="large" color="primary" onClick={this.LedOn}>
             {this.state.loading ? <CircularProgress color="secondary" size={24} /> : '点灯'}
           </Button>
           {!!this.state.errmsg && (

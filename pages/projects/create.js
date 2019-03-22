@@ -8,6 +8,7 @@ import Led from '../../libs/led';
 import withRoot from '../../libs/withRoot';
 import Layout from '../../components/Layout';
 
+console.log(Gpio)
 class ProjectCreate extends React.Component {
   constructor(props) {
     super(props);

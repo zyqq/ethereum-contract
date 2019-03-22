@@ -22,12 +22,13 @@ class ProjectCreate extends React.Component {
     };
 
     this.onSubmit = this.createProject.bind(this);
-    this.LedOn = this.LedOn.bind(this)
+    this.toggleLedStatus = this.toggleLedStatus.bind(this);
   }
 
 
   LedOn(){
     var led = new Gpio(36);
+    console.log(led)
     led.open(Gpio.OUTPUT,Gpio.LOW);
     console.log("now the door open");
     led.toggle();
@@ -84,7 +85,6 @@ class ProjectCreate extends React.Component {
 
       setTimeout(() => {
         // location.href = '/projects';
-        this.LedOn()
         location.href = '/';
       }, 1000);
     } catch (err) {
@@ -177,7 +177,7 @@ class ProjectCreate extends React.Component {
             {this.state.loading ? <CircularProgress color="secondary" size={24} /> : '创建项目'}
           </Button>
           
-          <Button variant="raised" size="large" color="primary" onClick={this.LedOn}>
+          <Button variant="raised" size="large" color="primary" onClick={this.toggleLedStatus}>
             {this.state.loading ? <CircularProgress color="secondary" size={24} /> : '点灯'}
           </Button>
           {!!this.state.errmsg && (

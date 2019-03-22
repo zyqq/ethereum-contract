@@ -8,4 +8,8 @@ module.exports = {
   publicRuntimeConfig: {
     infuraUrl: config.get('infuraUrl'),
   },
+
+  node: {
+    fs: "empty"
+  }
 };

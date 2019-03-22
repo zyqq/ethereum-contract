@@ -51,7 +51,7 @@ class Index extends React.Component {
   }
 
   render() {
-    const { projects } = this.state.projects;
+    const projects  = this.state.projects;
 
     return (
       <Layout>

@@ -12,6 +12,10 @@
 * Chrome
 * 有良好命令行支持的系统
 
+## 启动项目
+
+`npm start` 会用 pm2 启动项目
+
 ## 如何开发
 
 参见掘金小册[《区块链开发入门：从 0 到 1 构建基于以太坊智能合约的 ICO DApp》](https://juejin.im/book/5addb2eb6fb9a07abd0d4557)。

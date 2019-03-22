@@ -43,8 +43,15 @@ class Index extends React.Component {
     return { projects };
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      projects: this.props.projects
+    }
+  }
+
   render() {
-    const { projects } = this.props;
+    const { projects } = this.state.projects;
 
     return (
       <Layout>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Button, Typography, TextField, Paper, CircularProgress } from '@material-ui/core';
-import { Gpio } from 'rpio2';
+import { Gpio } from 'rpio2/lib';
 import { Link } from '../../routes';
 import web3 from '../../libs/web3';
 import ProjectList from '../../libs/projectList';
@@ -8,7 +8,6 @@ import ProjectList from '../../libs/projectList';
 import withRoot from '../../libs/withRoot';
 import Layout from '../../components/Layout';
 
-console.log(Gpio)
 class ProjectCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -24,17 +23,19 @@ class ProjectCreate extends React.Component {
 
     this.onSubmit = this.createProject.bind(this);
     this.toggleLedStatus = this.toggleLedStatus.bind(this);
+    this.LedOn = this.LedOn.bind(this); 
   }
 
 
   LedOn(){
-    var led = new Gpio(36);
-    console.log(led)
-    led.open(Gpio.OUTPUT,Gpio.LOW);
-    console.log("now the door open");
-    led.toggle();
-    led.sleep(10000);
-    led.close();
+    console.log(Gpio)
+    // var led = new Gpio(36);
+    // console.log(led)
+    // led.open(Gpio.OUTPUT,Gpio.LOW);
+    // console.log("now the door open");
+    // led.toggle();
+    // led.sleep(10000);
+    // led.close();
   }
 
   getInputHandler(key) {

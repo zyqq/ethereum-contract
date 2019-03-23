@@ -1,3 +1,10 @@
+/**
+ * @desc: { 部署合约，最后输出合约地址在根目录，以 ${contactName}Address.json 命名 } 
+ * @author: zhengyiqiu 
+ * @Create Date: 2019-03-23 20:05:44 
+ * @Last Modified by: zhengyiqiu
+ * @Last Modified time: 2019-03-23 20:06:31
+ */
 const fs = require('fs-extra');
 const path = require('path');
 const config = require('config');
@@ -42,12 +49,13 @@ function deploy(contractPathArr, contractNameArr) {
         const addressFile = path.resolve(__dirname, `../${contractName}Address.json`);
         fs.writeFileSync(addressFile, JSON.stringify(contractAddress));
         console.log(`${contractName}地址写入成功:`, addressFile);
-        
+        process.exit();
     })();
   })
 
 }
 
-const projectListContractPath = path.resolve(__dirname, '../compiled/ProjectList.json');
-const LedContractPath = path.resolve(__dirname, '../compiled/Led.json');
-deploy([projectListContractPath, LedContractPath], ['projectList', 'led']);
+// const projectListContractPath = path.resolve(__dirname, '../compiled/ProjectList.json');
+// const LedContractPath = path.resolve(__dirname, '../compiled/Led.json');
+const LogsContractPath = path.resolve(__dirname, '../compiled/Logs.json');
+deploy([LogsContractPath], ['logs']);

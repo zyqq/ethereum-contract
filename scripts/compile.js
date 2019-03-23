@@ -1,3 +1,10 @@
+/**
+ * @desc: { 编译 contracts 文件夹下的所有合约 } 
+ * @author: zhengyiqiu 
+ * @Create Date: 2019-03-23 20:05:07 
+ * @Last Modified by: zhengyiqiu
+ * @Last Modified time: 2019-03-23 20:05:30
+ */
 const fs = require('fs-extra');
 const path = require('path');
 const solc = require('solc');

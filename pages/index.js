@@ -3,107 +3,79 @@ import { Grid, Button, Typography, Card, CardContent, CardActions, LinearProgres
 
 import { Link } from '../routes';
 import web3 from '../libs/web3';
-import Project from '../libs/project';
-import ProjectList from '../libs/projectList';
 import withRoot from '../libs/withRoot';
 import Layout from '../components/Layout';
 import InfoBlock from '../components/InfoBlock';
+import Logs from '../libs/logs';
+import Log from '../libs/log';
 
 class Index extends React.Component {
   static async getInitialProps({ req }) {
-    const addressList = await ProjectList.methods.getProjects().call();
+    const addressList = await Logs.methods.getLogs().call();
     const summaryList = await Promise.all(
       addressList.map(address =>
-        Project(address)
-          .methods.getSummary()
+        Log(address)
+          .methods.getLog()
           .call()
       )
     );
     console.log({ summaryList });
-    const projects = addressList.map((address, i) => {
-      const [description, minInvest, maxInvest, goal, balance, investorCount, paymentCount, owner] = Object.values(
+    const logs = addressList.map((address, i) => {
+      const [temp, time, owner] = Object.values(
         summaryList[i]
       );
 
       return {
         address,
-        description,
-        minInvest,
-        maxInvest,
-        goal,
-        balance,
-        investorCount,
-        paymentCount,
+        temp,
+        time,
         owner,
       };
     });
 
-    console.log(projects);
+    console.log(logs);
 
-    return { projects };
+    return { logs };
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      projects: this.props.projects
+      logs: this.props.logs
     }
   }
 
   render() {
-    const projects  = this.state.projects;
+    const logs  = this.state.logs;
 
+    console.log(logs)
     return (
       <Layout>
         <Grid container spacing={16}>
-          {/* {projects.length === 0 && <p>还没有项目，快去创建吧</p>} */}
-          {projects.length === 0 && <p>还没有区块，快去创建吧</p>}
-          {projects.length > 0 && projects.map(this.renderProject)}
+          {logs.length === 0 && <p>还没有操作日志，快去操控树莓派吧</p>}
+          {logs.length > 0 && logs.map(this.renderLog)}
         </Grid>
       </Layout>
     );
   }
 
-  renderProject(project) {
-    const progress = project.balance / project.goal * 100;
-
+  renderLog(log) {
+    let { address, temp, time, owner } = log
     return (
-      // <Grid item md={6} key={project.address}>
-      //   <Card>
-      //     <CardContent>
-      //       <Typography gutterBottom variant="headline" component="h2">
-      //         {project.description}
-      //       </Typography>
-      //       <LinearProgress style={{ margin: '10px 0' }} color="primary" variant="determinate" value={progress} />
-      //       <Grid container spacing={16}>
-      //         <InfoBlock title={`${web3.utils.fromWei(project.goal, 'ether')} ETH`} description="募资上限" />
-      //         <InfoBlock title={`${web3.utils.fromWei(project.minInvest, 'ether')} ETH`} description="最小投资金额" />
-      //         <InfoBlock title={`${web3.utils.fromWei(project.maxInvest, 'ether')} ETH`} description="最大投资金额" />
-      //         <InfoBlock title={`${project.investorCount}人`} description="参投人数" />
-      //         <InfoBlock title={`${web3.utils.fromWei(project.balance, 'ether')} ETH`} description="已募资金额" />
-      //       </Grid>
-      //     </CardContent>
-      //     <CardActions>
-      //       <Link route={`/projects/${project.address}`}>
-      //         <Button size="small" color="primary">
-      //           立即投资
-      //         </Button>
-      //       </Link>
-      //       <Link route={`/projects/${project.address}`}>
-      //         <Button size="small" color="secondary">
-      //           查看详情
-      //         </Button>
-      //       </Link>
-      //     </CardActions>
-      //   </Card>
-      // </Grid>
-
-      <Layout>
-        <Typography variant="title" color="inherit">
-          {/* 创建项目 */}
-          全部区块
-        </Typography>
-      </Layout>
+      <Grid item md={6} key={address}>
+        <Card>
+          <CardContent>
+            <Typography gutterBottom variant="headline" component="h2">
+              { address }
+            </Typography>
+            <Grid container spacing={16}>
+              <InfoBlock title={`${owner}`} description="操作人地址" />
+              <InfoBlock title={`${time}`} description="日期" />
+              <InfoBlock title={`${temp}`} description="温度" />
+            </Grid>
+          </CardContent>
+        </Card>
+      </Grid>
     );
   }
 }

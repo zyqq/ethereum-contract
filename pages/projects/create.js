@@ -2,8 +2,9 @@ import React from 'react';
 import { Grid, Button, Typography, TextField, Paper, CircularProgress } from '@material-ui/core';
 import { Link } from '../../routes';
 import web3 from '../../libs/web3';
-import ProjectList from '../../libs/projectList';
+// import ProjectList from '../../libs/projectList';
 import Led from '../../libs/led';
+import Logs from '../../libs/logs';
 import withRoot from '../../libs/withRoot';
 import Layout from '../../components/Layout';
 
@@ -12,76 +13,77 @@ class ProjectCreate extends React.Component {
     super(props);
 
     this.state = {
-      description: '',
-      minInvest: 0,
-      maxInvest: 0,
-      goal: 0,
+      // description: '',
+      // minInvest: 0,
+      // maxInvest: 0,
+      // goal: 0,
       errmsg: '',
       loading: false,
     };
 
-    this.onSubmit = this.createProject.bind(this);
+    // this.onSubmit = this.createProject.bind(this);
     this.toggleLedStatus = this.toggleLedStatus.bind(this);
+    this.updateTemp = this.updateTemp.bind(this);
   }
 
-  getInputHandler(key) {
-    return e => {
-      console.log(e.target.value);
-      this.setState({ [key]: e.target.value });
-    };
-  }
+  // getInputHandler(key) {
+  //   return e => {
+  //     console.log(e.target.value);
+  //     this.setState({ [key]: e.target.value });
+  //   };
+  // }
 
-  async createProject() {
-    const { description, minInvest, maxInvest, goal } = this.state;
-    console.log(this.state);
+  // async createProject() {
+  //   const { description, minInvest, maxInvest, goal } = this.state;
+  //   console.log(this.state);
 
-    // 字段合规检查
-    if (!description) {
-      return this.setState({ errmsg: '项目名称不能为空' });
-    }
-    if (minInvest <= 0) {
-      return this.setState({ errmsg: '项目最小投资金额必须大于0' });
-    }
-    if (maxInvest <= 0) {
-      return this.setState({ errmsg: '项目最大投资金额必须大于0' });
-    }
-    if (maxInvest < minInvest) {
-      return this.setState({ errmsg: '项目最小投资金额必须小于最大投资金额' });
-    }
-    if (goal <= 0) {
-      return this.setState({ errmsg: '项目募资上限必须大于0' });
-    }
+  //   // 字段合规检查
+  //   if (!description) {
+  //     return this.setState({ errmsg: '项目名称不能为空' });
+  //   }
+  //   if (minInvest <= 0) {
+  //     return this.setState({ errmsg: '项目最小投资金额必须大于0' });
+  //   }
+  //   if (maxInvest <= 0) {
+  //     return this.setState({ errmsg: '项目最大投资金额必须大于0' });
+  //   }
+  //   if (maxInvest < minInvest) {
+  //     return this.setState({ errmsg: '项目最小投资金额必须小于最大投资金额' });
+  //   }
+  //   if (goal <= 0) {
+  //     return this.setState({ errmsg: '项目募资上限必须大于0' });
+  //   }
 
-    const minInvestInWei = web3.utils.toWei(minInvest, 'ether');
-    const maxInvestInWei = web3.utils.toWei(maxInvest, 'ether');
-    const goalInWei = web3.utils.toWei(goal, 'ether');
+  //   const minInvestInWei = web3.utils.toWei(minInvest, 'ether');
+  //   const maxInvestInWei = web3.utils.toWei(maxInvest, 'ether');
+  //   const goalInWei = web3.utils.toWei(goal, 'ether');
 
-    try {
-      this.setState({ loading: true, errmsg: '' });
+  //   try {
+  //     this.setState({ loading: true, errmsg: '' });
 
-      // 获取账户
-      const accounts = await web3.eth.getAccounts();
-      const owner = accounts[0];
+  //     // 获取账户
+  //     const accounts = await web3.eth.getAccounts();
+  //     const owner = accounts[0];
 
-      // 创建项目
-      const result = await ProjectList.methods
-        .createProject(description, minInvestInWei, maxInvestInWei, goalInWei)
-        .send({ from: owner, gas: '5000000' });
+  //     // 创建项目
+  //     const result = await ProjectList.methods
+  //       .createProject(description, minInvestInWei, maxInvestInWei, goalInWei)
+  //       .send({ from: owner, gas: '5000000' });
 
-      this.setState({ errmsg: '项目创建成功' });
-      console.log(result);
+  //     this.setState({ errmsg: '项目创建成功' });
+  //     console.log(result);
 
-      setTimeout(() => {
-        // location.href = '/projects';
-        location.href = '/';
-      }, 1000);
-    } catch (err) {
-      console.error(err);
-      this.setState({ errmsg: err.message || err.toString });
-    } finally {
-      this.setState({ loading: false });
-    }
-  }
+  //     setTimeout(() => {
+  //       // location.href = '/projects';
+  //       location.href = '/';
+  //     }, 1000);
+  //   } catch (err) {
+  //     console.error(err);
+  //     this.setState({ errmsg: err.message || err.toString });
+  //   } finally {
+  //     this.setState({ loading: false });
+  //   }
+  // }
 
   async toggleLedStatus() {
     try {
@@ -99,9 +101,36 @@ class ProjectCreate extends React.Component {
       this.setState({ errmsg: '点灯成功' });
       console.log(result);
 
-      setTimeout(() => {
+      // setTimeout(() => {
         // location.href = '/projects';
         // location.href = '/';
+      // }, 1000);
+    } catch (err) {
+      console.error(err);
+      this.setState({ errmsg: err.message || err.toString });
+    } finally {
+      this.setState({ loading: false });
+    }
+  }
+
+  async updateTemp() {
+    try {
+      this.setState({ loading: true, errmsg: '' });
+
+      // 获取账户
+      const accounts = await web3.eth.getAccounts();
+      const owner = accounts[0];
+
+      // 创建项目
+      const result = await Logs.methods
+        .createLogs(Math.random().toFixed(2) * 100, new Date().toLocaleString())
+        .send({ from: owner, gas: '5000000' });
+
+      this.setState({ errmsg: '点灯日志创建成功' });
+      console.log(result);
+
+      setTimeout(() => {
+        location.href = '/';
       }, 1000);
     } catch (err) {
       console.error(err);
@@ -173,6 +202,9 @@ class ProjectCreate extends React.Component {
         <Paper style={{ width: '25%', padding: '15px', marginTop: '15px' }}>
           <Button variant="raised" size="large" color="primary" onClick={this.toggleLedStatus}>
             {this.state.loading ? <CircularProgress color="secondary" size={24} /> : '点灯'}
+          </Button>
+          <Button variant="raised" size="large" color="primary" onClick={this.updateTemp}>
+            {this.state.loading ? <CircularProgress color="secondary" size={24} /> : '记录'}
           </Button>
 
           {!!this.state.errmsg && (

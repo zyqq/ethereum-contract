@@ -20,10 +20,10 @@ const styles = {
 
 class InfoBlock extends React.Component {
   render() {
-    const { classes, title, description } = this.props;
+    const { classes, title, description, md } = this.props;
 
     return (
-      <Grid item md={4}>
+      <Grid item md={md}>
         <div className={classes.container}>
           <Typography variant="title" color="inherit" className={classes.title}>
             {title}

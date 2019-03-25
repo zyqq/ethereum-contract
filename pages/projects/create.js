@@ -123,7 +123,7 @@ class ProjectCreate extends React.Component {
 
       // 创建项目
       const result = await Logs.methods
-        .createLogs(Math.random().toFixed(2) * 100, new Date().toLocaleString())
+        .createLogs(this.randomFrom(20, 25), new Date().toLocaleString())
         .send({ from: owner, gas: '5000000' });
 
       this.setState({ errmsg: '点灯日志创建成功' });
@@ -138,6 +138,12 @@ class ProjectCreate extends React.Component {
     } finally {
       this.setState({ loading: false });
     }
+  }
+
+  //获取指定区间范围随机数，包括lowerValue和upperValue
+  randomFrom(lowerValue,upperValue)
+  {
+    return Math.floor(Math.random() * (upperValue - lowerValue + 1) + lowerValue);
   }
 
   render() {
